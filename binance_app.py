@@ -44,11 +44,18 @@ def fetch_ohlcv_data(symbol, interval='1d', limit=1000, num_data_points=999):
     final_df = pd.concat(df_list, axis=0)
     return final_df[['open_time', 'open', 'high', 'low', 'close', 'volume']].reset_index(drop=True)
 
-# Fetch data from Binance Spot API
 response_spot = requests.get("https://api.binance.com/api/v3/exchangeInfo")
-data_spot = response_spot.json()
-pairs_spot = data_spot["symbols"]
-spot_symbols = [pair["symbol"] for pair in pairs_spot]
+
+if response_spot.status_code == 200:
+    data_spot = response_spot.json()
+    if "symbols" in data_spot:
+        pairs_spot = data_spot["symbols"]
+        spot_symbols = [pair["symbol"] for pair in pairs_spot]
+        # Continue with your existing logic...
+    else:
+        st.error("The 'symbols' key does not exist in the API response.")
+else:
+    st.error(f"Failed to get data from Binance API. Status code: {response_spot.status_code}")
 
 # Sidebar options
 selected_option = st.sidebar.selectbox(

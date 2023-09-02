@@ -2,7 +2,9 @@ import streamlit as st
 import requests
 import pandas as pd
 import plotly.graph_objects as go
+import plotly 
 import numpy as np
+
 
 # Function to fetch OHLCV data from Binance
 def fetch_ohlcv_data(symbol, interval='1d', limit=1000, num_data_points=999):

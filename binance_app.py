@@ -2,9 +2,7 @@ import streamlit as st
 import requests
 import pandas as pd
 import plotly.graph_objects as go
-import plotly 
 import numpy as np
-
 
 # Function to fetch OHLCV data from Binance
 def fetch_ohlcv_data(symbol, interval='1d', limit=1000, num_data_points=999):
@@ -181,5 +179,3 @@ if coin_pairs:
         hovermode='x unified') # Show info for all traces at the closest X position
 
     st.plotly_chart(fig)
-
-

@@ -47,7 +47,7 @@ def fetch_ohlcv_data(symbol, interval='1d', limit=1000, num_data_points=999):
 # Fetch data from Binance Spot API
 response_spot = requests.get("https://api.binance.com/api/v3/exchangeInfo")
 data_spot = response_spot.json()
-pairs_spot = data_spot["symbol"]
+pairs_spot = data_spot["symbols"]
 spot_symbols = [pair["symbol"] for pair in pairs_spot]
 
 # Sidebar options
